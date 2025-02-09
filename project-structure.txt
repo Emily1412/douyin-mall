@@ -1,0 +1,94 @@
+douyin-mall/
+├── common/                     # 公共模块
+│   ├── config/                # 配置
+│   ├── middleware/            # 中间件
+│   ├── utils/                 # 工具函数
+│   └── proto/                 # gRPC 协议文件
+│
+├── gateway/                    # API 网关服务
+│   ├── config/                # 网关配置
+│   │   └── config.yaml
+│   ├── middleware/            # 网关中间件
+│   │   ├── auth.go           # 认证中间件
+│   │   ├── cors.go           # 跨域处理
+│   │   ├── rate_limit.go     # 限流中间件
+│   │   └── trace.go          # 链路追踪
+│   ├── router/               # 路由管理
+│   │   ├── router.go
+│   │   └── routes/
+│   │       ├── user.go       # 用户相关路由
+│   │       ├── product.go    # 商品相关路由
+│   │       └── order.go      # 订单相关路由
+│   ├── handler/              # 请求处理
+│   │   ├── proxy.go         # 代理转发
+│   │   └── response.go      # 响应处理
+│   └── main.go               # 网关入口
+│
+├── user-service/              # 用户服务
+│   ├── api/                  # API 定义
+│   ├── cmd/                  # 启动入口
+│   │   └── main.go
+│   ├── config/              # 配置文件
+│   │   └── config.yaml
+│   ├── internal/            # 内部实现
+│   │   ├── handler/        # 处理器
+│   │   ├── repository/     # 数据仓储
+│   │   └── service/        # 业务逻辑
+│   ├── pkg/                # 公共包
+│   └── proto/              # 协议文件
+│
+├── product-service/          # 商品服务
+│   ├── api/
+│   ├── cmd/
+│   │   └── main.go
+│   ├── config/
+│   │   └── config.yaml
+│   ├── internal/
+│   │   ├── handler/
+│   │   ├── repository/
+│   │   └── service/
+│   ├── pkg/
+│   └── proto/
+│
+├── order-service/            # 订单服务
+│   ├── api/
+│   ├── cmd/
+│   │   └── main.go
+│   ├── config/
+│   │   └── config.yaml
+│   ├── internal/
+│   │   ├── handler/
+│   │   ├── repository/
+│   │   └── service/
+│   ├── pkg/
+│   └── proto/
+│
+├── payment-service/          # 支付服务
+│   ├── api/
+│   ├── cmd/
+│   │   └── main.go
+│   ├── config/
+│   │   └── config.yaml
+│   ├── internal/
+│   │   ├── handler/
+│   │   ├── repository/
+│   │   └── service/
+│   ├── pkg/
+│   └── proto/
+│
+├── cart-service/            # 购物车服务
+│   ├── api/
+│   ├── cmd/
+│   │   └── main.go
+│   ├── config/
+│   │   └── config.yaml
+│   ├── internal/
+│   │   ├── handler/
+│   │   ├── repository/
+│   │   └── service/
+│   ├── pkg/
+│   └── proto/
+│
+├── docker-compose.yaml      # 容器编排配置
+├── Makefile                # 项目管理命令
+└── README.md              # 项目说明文档 
