@@ -23,3 +23,9 @@ func (s *UserService) Login(ctx context.Context, req *pb.LoginReq) (*pb.LoginRes
 	loginService := NewLoginService(ctx, s.DB)
 	return loginService.Run(req)
 }
+
+// GetUserInfo 实现获取用户信息
+func (s *UserService) GetUserInfo(ctx context.Context, req *pb.GetUserInfoReq) (*pb.GetUserInfoResp, error) {
+	userInfoService := NewUserInfoService(ctx, s.DB)
+	return userInfoService.Run(req)
+}

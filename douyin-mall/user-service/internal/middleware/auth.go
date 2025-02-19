@@ -36,4 +36,4 @@ func AuthInterceptor(ctx context.Context, req interface{}, info *grpc.UnaryServe
 	// 将用户信息添加到 context
 	newCtx := context.WithValue(ctx, "user_id", claims.UserID)
 	return handler(newCtx, req)
-} 
+}

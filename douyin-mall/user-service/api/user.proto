@@ -2,11 +2,12 @@ syntax="proto3";
 
 package user;
 
-option go_package="/user";
+option go_package="user-service/api";
 
 service UserService {
     rpc Register(RegisterReq) returns (RegisterResp) {}
     rpc Login(LoginReq) returns (LoginResp) {}
+    rpc GetUserInfo(GetUserInfoReq) returns (GetUserInfoResp) {}
 }
 
 message RegisterReq {
@@ -27,4 +28,14 @@ message LoginReq {
 message LoginResp {
     int32 user_id = 1;
     string token = 2;
+}
+
+message GetUserInfoReq {
+    int32 user_id = 1;
+}
+
+message GetUserInfoResp {
+    int32 user_id = 1;
+    string email = 2;
+    string created_at = 3;
 }
