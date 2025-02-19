@@ -3,7 +3,8 @@ package service
 import (
 	"context"
 	"errors"
-	pb "user-service/api/user"
+	"fmt"
+	pb "user-service/api"
 	"user-service/internal/model"
 
 	"golang.org/x/crypto/bcrypt"
@@ -24,8 +25,11 @@ func NewRegisterService(ctx context.Context, db *gorm.DB) *RegisterService {
 
 // Run 实现注册逻辑
 func (s *RegisterService) Run(req *pb.RegisterReq) (resp *pb.RegisterResp, err error) {
+	fmt.Printf("Received register request: %+v\n", req)
+
 	// 验证密码
 	if req.Password != req.ConfirmPassword {
+		fmt.Println("Password mismatch")
 		err = errors.New("两次输入的密码不一致")
 		return
 	}

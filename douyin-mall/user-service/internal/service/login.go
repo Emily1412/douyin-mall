@@ -3,7 +3,8 @@ package service
 import (
 	"context"
 	"errors"
-	pb "user-service/api/user"
+	"fmt"
+	pb "user-service/api"
 	"user-service/internal/model"
 	"user-service/internal/pkg/jwt"
 
@@ -25,15 +26,19 @@ func NewLoginService(ctx context.Context, db *gorm.DB) *LoginService {
 
 // Run 实现登录逻辑
 func (s *LoginService) Run(req *pb.LoginReq) (resp *pb.LoginResp, err error) {
+	fmt.Printf("Received login request: %+v\n", req)
+
 	// 查找用户
 	userRow, err := model.GetByEmail(s.db, req.Email)
 	if err != nil {
+		fmt.Printf("Error finding user: %v\n", err)
 		if err == gorm.ErrRecordNotFound {
 			return nil, errors.New("用户不存在")
 		}
 		return nil, errors.New("查询用户失败")
 	}
 
+	fmt.Printf("Found user: %+v\n", userRow)
 	// 验证密码
 	err = bcrypt.CompareHashAndPassword([]byte(userRow.Password), []byte(req.Password))
 	if err != nil {

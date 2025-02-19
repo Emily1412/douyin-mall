@@ -2,7 +2,7 @@ package service
 
 import (
 	"context"
-	pb "user-service/api/user"
+	pb "user-service/api"
 
 	"gorm.io/gorm"
 )
