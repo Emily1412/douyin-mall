@@ -1,0 +1,2 @@
+p, 1, /user.UserService/GetUserInfo, access
+g, 1, admin 

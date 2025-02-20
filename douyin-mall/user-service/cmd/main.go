@@ -42,6 +42,12 @@ func main() {
 	}
 	fmt.Println("Successfully migrated database schema")
 
+	// 初始化认证中间件
+	authMiddleware, err := middleware.NewAuthMiddleware()
+	if err != nil {
+		log.Fatalf("failed to initialize auth middleware: %v", err)
+	}
+
 	// 创建 gRPC 服务器，添加拦截器
 	lis, err := net.Listen("tcp", ":50051")
 	if err != nil {
@@ -49,7 +55,7 @@ func main() {
 	}
 
 	server := grpc.NewServer(
-		grpc.UnaryInterceptor(middleware.AuthInterceptor),
+		grpc.UnaryInterceptor(authMiddleware.AuthInterceptor),
 	)
 	userService := &service.UserService{
 		DB: db,
