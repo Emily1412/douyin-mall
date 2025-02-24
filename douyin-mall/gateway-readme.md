@@ -1,6 +1,7 @@
 Q:后续如果要添加其他服务路由，需要如何添加？除了payment还有user、product、cart、order、checkout这五个服务
 
 按照现有的 payment 服务结构，添加其他服务路由需要：
+
 1.在 gateway/handler/ 下创建对应的处理器:
 package user
 
@@ -20,6 +21,7 @@ func Login(c *gin.Context) {
 func Profile(c *gin.Context) {
     // 实现获取用户信息逻辑
 }
+
 2.在 gateway/router/routes/ 下添加路由文件:
 package routes
 
@@ -42,10 +44,11 @@ func RegisterUserRoutes(r *gin.RouterGroup) {
         }
     }
 }
+
 3. 在 router.go 中注册新路由:
+
 func SetupRouter() *gin.Engine {
     // ... 现有代码 ...
-
     api := r.Group("/api/v1")
     {
         routes.RegisterPaymentRoutes(api)
@@ -55,7 +58,6 @@ func SetupRouter() *gin.Engine {
         routes.RegisterOrderRoutes(api)
         routes.RegisterCheckoutRoutes(api)
     }
-
     return r
 }
 
@@ -68,7 +70,9 @@ func SetupRouter() *gin.Engine {
 Q: 请把全部服务添加服务路由的步骤详细说明
 
 我来详细说明添加所有服务路由的步骤：
+
 1.创建各服务的 Proto 文件:
+
 user-service/api/user.proto
 product-service/api/product.proto
 cart-service/api/cart.proto
@@ -77,12 +81,10 @@ checkout-service/api/checkout.proto
 
 2.在 gateway/handler/ 下创建对应的处理器:
 package user
-
 import (
     "github.com/gin-gonic/gin"
     pb "douyin-mall/user-service/api"
 )
-
 func Register(c *gin.Context) {}
 func Login(c *gin.Context) {}
 func Profile(c *gin.Context) {}
@@ -118,11 +120,10 @@ routes/order.go (订单创建、查询、取消)
 routes/checkout.go (结算相关)
 
 4.更新 router.go 注册所有路由:
+
 func SetupRouter() *gin.Engine {
     r := gin.Default()
-    
     // ... 现有中间件代码 ...
-
     api := r.Group("/api/v1")
     {
         routes.RegisterUserRoutes(api)
@@ -132,12 +133,12 @@ func SetupRouter() *gin.Engine {
         routes.RegisterCheckoutRoutes(api)
         routes.RegisterPaymentRoutes(api)
     }
-
     return r
 }
 
 5.更新健康检查:
 在 gateway/handler/health/health.go 中取消注释并实现所有服务的健康检查：
+
 var serviceChecks = map[string]healthCheckFunc{
 	"payment": checkPaymentService,
 	// "user":     checkUserService,
