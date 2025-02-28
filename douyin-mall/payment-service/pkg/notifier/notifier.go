@@ -4,7 +4,7 @@ package payment
 
 import (
 	"context"
-	"douyin-mall/payment-service/model"
+	"douyin-mall/payment-service/internal/model"
 	"fmt"
 )
 

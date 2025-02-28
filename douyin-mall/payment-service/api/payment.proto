@@ -7,6 +7,7 @@ option go_package = "douyin-mall/proto/paymentpb";
 service PaymentService {
   rpc Charge(ChargeReq) returns (ChargeResp) {}
   rpc GetTransactionStatus(GetTransactionStatusReq) returns (GetTransactionStatusResp) {}
+  rpc HealthCheck(HealthCheckRequest) returns (HealthCheckResponse) {}
 }
 
 message CreditCardInfo {
@@ -35,4 +36,9 @@ message GetTransactionStatusResp {
     string status = 1;
     float amount = 2;
     string order_id = 3;
+}
+
+message HealthCheckRequest {}
+message HealthCheckResponse {
+    bool status = 1;
 }

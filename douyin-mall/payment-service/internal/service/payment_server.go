@@ -2,9 +2,10 @@ package service
 
 import (
 	"context"
-	"douyin-mall/payment-service/model"
-	payment "douyin-mall/payment-service/pkg/processor"
+	"douyin-mall/payment-service/internal/model"
 	"douyin-mall/payment-service/internal/repository"
+	payment "douyin-mall/payment-service/pkg/processor"
+
 	//proto所在地
 	pb "douyin-mall/payment-service/api"
 	"fmt"
@@ -123,5 +124,11 @@ func (s *PaymentServer) GetTransactionStatus(ctx context.Context, req *pb.GetTra
 		Status:  tx.Status,
 		Amount:  float32(tx.Amount),
 		OrderId: tx.OrderID,
+	}, nil
+}
+
+func (s *PaymentServer) HealthCheck(ctx context.Context, req *pb.HealthCheckRequest) (*pb.HealthCheckResponse, error) {
+	return &pb.HealthCheckResponse{
+		Status: true,
 	}, nil
 }

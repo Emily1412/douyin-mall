@@ -3,6 +3,7 @@ package health
 import (
 	"context"
 	"douyin-mall/gateway/config"
+
 	//proto所在地
 	pb "douyin-mall/payment-service/api"
 	"net/http"
@@ -28,26 +29,21 @@ var serviceChecks = map[string]healthCheckFunc{
 }
 
 func checkPaymentService() bool {
-	// 设置超时上下文
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
 
-	// 连接支付服务
 	conn, err := grpc.Dial(config.GlobalConfig.Services.Payment, grpc.WithInsecure())
 	if err != nil {
 		return false
 	}
 	defer conn.Close()
 
-	// 创建客户端
 	client := pb.NewPaymentServiceClient(conn)
-
-	// 调用健康检查接口
-	_, err = client.GetTransactionStatus(ctx, &pb.GetTransactionStatusReq{
-		TransactionId: "health-check",
-	})
-
-	return err == nil
+	resp, err := client.HealthCheck(ctx, &pb.HealthCheckRequest{})
+	if err != nil {
+		return false
+	}
+	return resp.Status
 }
 
 // 检查商品服务
@@ -183,4 +179,3 @@ func ReadinessCheck(c *gin.Context) {
 		})
 	}
 }
-
