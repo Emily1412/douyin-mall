@@ -5,8 +5,8 @@ import (
 	"douyin-mall/gateway/config"
 
 	//proto所在地
-	pb "payment-service/api"
 	"net/http"
+	pb "payment-service/api"
 	"sync"
 	"time"
 
@@ -47,20 +47,20 @@ func checkPaymentService() bool {
 }
 
 // 检查商品服务
-func checkProductService() bool {
-	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
-	defer cancel()
+// func checkProductService() bool {
+// 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+// 	defer cancel()
 
-	conn, err := grpc.Dial(config.GlobalConfig.Services.Product, grpc.WithInsecure())
-	if err != nil {
-		return false
-	}
-	defer conn.Close()
+// 	conn, err := grpc.Dial(config.GlobalConfig.Services.Product, grpc.WithInsecure())
+// 	if err != nil {
+// 		return false
+// 	}
+// 	defer conn.Close()
 
-	client := pb.NewProductServiceClient(conn)
-	_, err = client.HealthCheck(ctx, &pb.HealthCheckRequest{})
-	return err == nil
-}
+// 	client := pb.NewProductServiceClient(conn)
+// 	_, err = client.HealthCheck(ctx, &pb.HealthCheckRequest{})
+// 	return err == nil
+// }
 
 // // 检查购物车服务
 // func checkCartService() bool {
