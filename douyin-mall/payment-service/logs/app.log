@@ -1,0 +1,8 @@
+{"level":"info","ts":1740843317.538283,"caller":"logger/logger.go:43","msg":"Logger initialized successfully"}
+{"level":"info","ts":1740843473.6287777,"caller":"middleware/grpc_interceptor.go:21","msg":"gRPC request started","method":"/payment.PaymentService/Charge"}
+{"level":"info","ts":1740843474.8880599,"caller":"middleware/grpc_interceptor.go:43","msg":"gRPC request completed","method":"/payment.PaymentService/Charge","duration":1.2592821}
+{"level":"info","ts":1740843483.227512,"caller":"middleware/grpc_interceptor.go:21","msg":"gRPC request started","method":"/payment.PaymentService/GetTransactionStatus"}
+{"level":"info","ts":1740843483.2286372,"caller":"middleware/grpc_interceptor.go:43","msg":"gRPC request completed","method":"/payment.PaymentService/GetTransactionStatus","duration":0.0011256}
+{"level":"info","ts":1740844479.3735092,"caller":"logger/logger.go:43","msg":"Logger initialized successfully"}
+{"level":"info","ts":1740844485.849711,"caller":"middleware/grpc_interceptor.go:21","msg":"gRPC request started","method":"/payment.PaymentService/HealthCheck"}
+{"level":"info","ts":1740844485.8512619,"caller":"middleware/grpc_interceptor.go:43","msg":"gRPC request completed","method":"/payment.PaymentService/HealthCheck","duration":0.0015511}

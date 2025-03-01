@@ -1,0 +1,10 @@
+go 1.24.0
+
+use (
+    ../douyin-mall
+    ./payment-service
+    ./user-service
+    ./order-service
+    ./product-service
+    ./cart-service
+)

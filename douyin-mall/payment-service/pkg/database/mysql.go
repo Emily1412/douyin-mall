@@ -3,7 +3,7 @@ package database
 import (
 	"fmt"
 
-	"douyin-mall/payment-service/internal/model"
+	"payment-service/internal/model"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"

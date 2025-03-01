@@ -25,7 +25,7 @@ var GlobalConfig Config
 func Init() error {
 	configPath := os.Getenv("CONFIG_PATH")
 	if configPath == "" {
-		configPath = "payment-service/config/config.yaml"
+		configPath = "D:\\headlight\\douyin-mall\\douyin-mall\\payment-service\\config\\config.yaml"
 	}
 
 	data, err := os.ReadFile(configPath)

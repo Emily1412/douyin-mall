@@ -3,8 +3,8 @@ package repository
 
 import (
 	"context"
-	"douyin-mall/payment-service/internal/model"
-	"douyin-mall/payment-service/pkg/database"
+	"payment-service/internal/model"
+	"payment-service/pkg/database"
 
 	"gorm.io/gorm"
 )
