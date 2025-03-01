@@ -1,0 +1,23 @@
+server:
+  port: 8080
+  mode: debug
+
+# 服务地址，填写每个模块的服务地址 
+services:
+  # user: "localhost:50051"
+  # product: "localhost:50052"
+  # cart: "localhost:50053"
+  # order: "localhost:50054"
+  # checkout: "localhost:50055"
+  payment: "localhost:50056"
+
+# jwt 配置
+jwt:
+  secret: "your-secret-key"
+  expireTime: 24  # hours
+
+# redis 配置
+redis:
+  addr: "localhost:6379"
+  password: ""
+  db: 0 

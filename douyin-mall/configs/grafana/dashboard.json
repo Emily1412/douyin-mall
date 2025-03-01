@@ -1,0 +1,25 @@
+{
+    "dashboard": {
+        "panels": [
+            {
+                "title": "支付请求数",
+                "type": "graph",
+                "targets": [
+                    {
+                        "expr": "rate(payment_requests_total[5m])",
+                        "legendFormat": "{{status}}"
+                    }
+                ]
+            },
+            {
+                "title": "支付处理时间",
+                "type": "heatmap",
+                "targets": [
+                    {
+                        "expr": "rate(payment_duration_seconds_bucket[5m])"
+                    }
+                ]
+            }
+        ]
+    }
+}
