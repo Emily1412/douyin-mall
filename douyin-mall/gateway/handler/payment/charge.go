@@ -4,7 +4,7 @@ import (
 	"context"
 	"douyin-mall/gateway/config"
 	//proto所在地
-	pb "douyin-mall/payment-service/api"
+	pb "payment-service/api"
 	"net/http"
 
 	"github.com/gin-gonic/gin"

@@ -17,7 +17,7 @@ import (
 
 func main() {
 	// 连接数据库
-	dsn := "root:123456@tcp(localhost:3306)/bytedance_user?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := "root:root@tcp(localhost:3306)/bytedance_user?charset=utf8mb4&parseTime=True&loc=Local"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		log.Fatalf("failed to connect database: %v", err)
@@ -43,6 +43,7 @@ func main() {
 	fmt.Println("Successfully migrated database schema")
 
 	// 初始化认证中间件
+	// 修改后
 	authMiddleware, err := middleware.NewAuthMiddleware()
 	if err != nil {
 		log.Fatalf("failed to initialize auth middleware: %v", err)

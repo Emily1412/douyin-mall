@@ -5,7 +5,7 @@ import (
 	"douyin-mall/gateway/config"
 
 	//proto所在地
-	pb "douyin-mall/payment-service/api"
+	pb "payment-service/api"
 	"net/http"
 	"sync"
 	"time"

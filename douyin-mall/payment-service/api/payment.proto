@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package payment;
 
-option go_package = "douyin-mall/proto/paymentpb";
+option go_package = "payment-service/api";
 
 service PaymentService {
   rpc Charge(ChargeReq) returns (ChargeResp) {}

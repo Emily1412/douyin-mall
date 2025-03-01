@@ -13,11 +13,11 @@ type Config struct {
 	} `yaml:"server"`
 
 	Services struct {
-		Payment string `yaml:"payment"`
-		User    string `yaml:"user"`
-		Order   string `yaml:"order"`
-		Product string `yaml:"product"`
-		Cart    string `yaml:"cart"`
+		Payment  string `yaml:"payment"`
+		User     string `yaml:"user"`
+		Order    string `yaml:"order"`
+		Product  string `yaml:"product"`
+		Cart     string `yaml:"cart"`
 		Checkout string `yaml:"checkout"`
 	} `yaml:"services"`
 
@@ -43,7 +43,7 @@ func Init() error {
 	// 从环境变量获取配置文件路径
 	configPath := os.Getenv("CONFIG_PATH")
 	if configPath == "" {
-		configPath = "gateway/config/gateway.yaml"
+		configPath = "D:\\headlight\\douyin-mall\\douyin-mall\\gateway\\config\\gateway.yaml"
 	}
 
 	// 读取配置文件

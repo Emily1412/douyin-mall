@@ -3,12 +3,12 @@ package main
 import (
 	"douyin-mall/common/middleware"
 	"douyin-mall/common/utils/logger"
-	"douyin-mall/payment-service/config"
-	"douyin-mall/payment-service/internal/service"
-	"douyin-mall/payment-service/pkg/database"
+	"payment-service/config"
+	"payment-service/internal/service"
+	"payment-service/pkg/database"
 
 	//proto所在地
-	pb "douyin-mall/payment-service/api"
+	pb "payment-service/api"
 	"fmt"
 	"log"
 	"net"

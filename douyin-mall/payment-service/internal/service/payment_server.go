@@ -2,12 +2,12 @@ package service
 
 import (
 	"context"
-	"douyin-mall/payment-service/internal/model"
-	"douyin-mall/payment-service/internal/repository"
-	payment "douyin-mall/payment-service/pkg/processor"
+	"payment-service/internal/model"
+	"payment-service/internal/repository"
+	payment "payment-service/pkg/processor"
 
 	//proto所在地
-	pb "douyin-mall/payment-service/api"
+	pb "payment-service/api"
 	"fmt"
 	"log"
 	"time"

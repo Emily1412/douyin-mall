@@ -4,7 +4,7 @@ package payment
 import (
 	"context"
 	//proto所在地
-	pb "douyin-mall/payment-service/api"
+	pb "payment-service/api"
 	"fmt"
 	"math/rand"
 	"time"
