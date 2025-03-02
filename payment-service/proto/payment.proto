@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package payment;
+
+option go_package = "payment-service/proto";
+
+service PaymentService {
+  rpc Pay(PayReq) returns (PayResp) {}
+  // 可扩展取消支付等接口
+}
+
+message CreditCardInfo {
+  string card_number = 1;
+  string card_holder = 2;
+  string expiration = 3;
+  string cvv = 4;
+}
+
+message PayReq {
+  uint32 order_id = 1;
+  float amount = 2;
+  CreditCardInfo credit_card = 3;
+}
+
+message PayResp {
+  string transaction_id = 1;
+  string status = 2; // e.g., success, failed
+}
