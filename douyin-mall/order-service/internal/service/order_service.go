@@ -2,10 +2,10 @@ package service
 
 import (
 	"context"
-	cartpb "douyin-mall/cart-service/proto"
-	"douyin-mall/order-service/internal/model"
-	"douyin-mall/order-service/internal/repository"
-	pb "douyin-mall/order-service/proto"
+	cartpb "cart-service/proto"
+	"order-service/internal/model"
+	"order-service/internal/repository"
+	pb "order-service/proto"
 	"fmt"
 	"strconv"
 

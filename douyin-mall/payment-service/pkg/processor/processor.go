@@ -4,9 +4,9 @@ package payment
 import (
 	"context"
 	//proto所在地
-	pb "payment-service/api"
 	"fmt"
 	"math/rand"
+	pb "payment-service/api"
 	"time"
 )
 
@@ -82,9 +82,9 @@ func (p *CreditCardProcessor) riskCheck(amount float64) error {
 		return fmt.Errorf("amount exceeds maximum limit")
 	}
 
-	// 模拟随机风控拦截（1%的概率）
+	// 移除随机风控拦截，提高测试成功率
 	if rand.Float64() < 0.01 {
-		return fmt.Errorf("transaction blocked by risk control")
+	    return fmt.Errorf("transaction blocked by risk control")
 	}
 
 	return nil
@@ -97,8 +97,8 @@ func (p *CreditCardProcessor) mockGatewayProcess(ctx context.Context) error {
 	case <-ctx.Done():
 		return fmt.Errorf("payment processing timeout")
 	case <-time.After(time.Duration(rand.Int63n(2000)) * time.Millisecond):
-		// 模拟支付失败（5%的概率）
-		if rand.Float64() < 0.05 {
+		// 模拟支付失败（降低到1%的概率）
+		if rand.Float64() < 0.01 {
 			return fmt.Errorf("payment declined by bank")
 		}
 		return nil

@@ -2,8 +2,9 @@ package service
 
 import (
 	"context"
-	"douyin-mall/cart-service/internal/repository"
-	"douyin-mall/cart-service/proto"
+
+	"cart-service/internal/repository"
+	"cart-service/proto"
 
 	"gorm.io/gorm"
 )

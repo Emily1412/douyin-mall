@@ -2,8 +2,8 @@ package handler
 
 import (
 	"context"
-	"douyin-mall/order-service/internal/service"
-	"douyin-mall/order-service/proto"
+	"order-service/internal/service"
+	"order-service/proto"
 	"fmt"
 	"log"
 )

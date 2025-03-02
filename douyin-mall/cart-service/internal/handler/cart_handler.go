@@ -2,8 +2,9 @@ package handler
 
 import (
 	"context"
-	"douyin-mall/cart-service/internal/service"
-	"douyin-mall/cart-service/proto"
+
+	"cart-service/internal/service"
+	"cart-service/proto"
 )
 
 // CartHandler 处理与购物车相关的请求

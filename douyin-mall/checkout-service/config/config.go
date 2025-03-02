@@ -20,6 +20,11 @@ type Config struct {
 		Host string `yaml:"host"`
 		Port int    `yaml:"port"`
 	} `yaml:"payment_service"`
+
+	OrderService struct {
+		Host string `yaml:"host"`
+		Port int    `yaml:"port"`
+	} `yaml:"order_service"`
 }
 
 // LoadConfig 从配置文件加载配置

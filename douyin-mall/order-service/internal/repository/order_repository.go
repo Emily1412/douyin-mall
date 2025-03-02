@@ -1,7 +1,8 @@
 package repository
 
 import (
-	"douyin-mall/order-service/internal/model"
+	"fmt"
+	"order-service/internal/model"
 	"strconv"
 
 	"gorm.io/gorm"
@@ -30,11 +31,14 @@ func (r *OrderRepository) ListOrders(userID uint32) ([]model.Order, error) {
 
 // MarkOrderPaid 更新订单状态为 "paid"
 func (r *OrderRepository) MarkOrderPaid(orderID string, userID uint32) error {
+	// 将字符串 orderID 转换为整数
 	id, err := strconv.ParseUint(orderID, 10, 64)
 	if err != nil {
-		return err
+		return fmt.Errorf("could not mark order as paid: %v", err)
 	}
+
+	// 使用整数 ID 更新订单状态
 	return r.DB.Model(&model.Order{}).
-		Where("id = ? AND user_id = ?", uint(id), userID).
+		Where("user_id = ? AND id = ?", userID, id).
 		Update("status", "paid").Error
 }

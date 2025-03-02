@@ -1,11 +1,11 @@
 package main
 
 import (
-	"douyin-mall/cart-service/config"
-	"douyin-mall/cart-service/internal/handler"
-	"douyin-mall/cart-service/internal/model"
-	"douyin-mall/cart-service/internal/service"
-	"douyin-mall/cart-service/proto"
+	"cart-service/config"
+	"cart-service/internal/handler"
+	"cart-service/internal/model"
+	"cart-service/internal/service"
+	"cart-service/proto"
 	"fmt"
 	"log"
 	"net"

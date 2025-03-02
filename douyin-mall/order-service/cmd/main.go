@@ -5,11 +5,11 @@ import (
 	"log"
 	"net"
 
-	"douyin-mall/order-service/config"
-	"douyin-mall/order-service/internal/handler"
-	"douyin-mall/order-service/internal/model"
-	"douyin-mall/order-service/internal/service"
-	pb "douyin-mall/order-service/proto"
+	"order-service/config"
+	"order-service/internal/handler"
+	"order-service/internal/model"
+	"order-service/internal/service"
+	pb "order-service/proto"
 
 	"google.golang.org/grpc"
 )

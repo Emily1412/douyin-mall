@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"douyin-mall/cart-service/internal/model"
+	"cart-service/internal/model"
 
 	"gorm.io/gorm"
 )
