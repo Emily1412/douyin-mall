@@ -17,7 +17,7 @@ import (
 
 func main() {
 	// 连接数据库
-	dsn := "root:root@tcp(localhost:3306)/bytedance_user?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := ":@tcp(localhost:3306)/bytedance_user?charset=utf8mb4&parseTime=True&loc=Local"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		log.Fatalf("failed to connect database: %v", err)
