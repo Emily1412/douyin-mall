@@ -1,27 +1,31 @@
 package jwt
 
 import (
-	"fmt"
+	"errors"
 
 	"github.com/golang-jwt/jwt/v5"
 )
 
+var jwtSecret = []byte("your-secret-key")
+
 type Claims struct {
-	UserID uint32
+	UserID uint
 	jwt.RegisteredClaims
 }
 
-var secretKey = []byte("your-secret-key")
-
-func ValidateToken(tokenString string) (*Claims, error) {
-	claims := &Claims{}
-	token, err := jwt.ParseWithClaims(tokenString, claims, func(t *jwt.Token) (interface{}, error) {
-		return secretKey, nil
+// ParseToken 解析 JWT token
+func ParseToken(tokenString string) (*Claims, error) {
+	token, err := jwt.ParseWithClaims(tokenString, &Claims{}, func(token *jwt.Token) (interface{}, error) {
+		return jwtSecret, nil
 	})
 
-	if err != nil || !token.Valid {
-		return nil, fmt.Errorf("invalid token")
+	if err != nil {
+		return nil, err
 	}
 
-	return claims, nil
+	if claims, ok := token.Claims.(*Claims); ok && token.Valid {
+		return claims, nil
+	}
+
+	return nil, errors.New("invalid token")
 }

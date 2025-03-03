@@ -38,10 +38,11 @@ func (s *CheckoutService) Checkout(ctx context.Context, req *pb.CheckoutReq) (*p
 	}
 
 	// 生成订单ID - 使用时间戳作为整数订单ID
-	orderId := fmt.Sprintf("%d", time.Now().UnixNano()/1000000) // 毫秒时间戳
+	orderIdInt64 := time.Now().UnixNano() / 1000000 // 毫秒时间戳
+	//orderIdInt64 := int64(5)
 
 	// 连接订单服务，获取订单金额
-	orderAmount, err := s.getOrderAmount(ctx, req.UserId, orderId)
+	orderAmount, err := s.getOrderAmount(ctx, req.UserId, orderIdInt64)
 	if err != nil {
 		log.Printf("获取订单金额失败: %v", err)
 		return nil, fmt.Errorf("获取订单金额失败: %v", err)
@@ -68,7 +69,7 @@ func (s *CheckoutService) Checkout(ctx context.Context, req *pb.CheckoutReq) (*p
 			CreditCardExpirationYear:  req.CreditCard.CreditCardExpirationYear,
 			CreditCardExpirationMonth: req.CreditCard.CreditCardExpirationMonth,
 		},
-		OrderId: orderId,
+		OrderId: fmt.Sprintf("%d", orderIdInt64),
 		UserId:  req.UserId,
 	}
 
@@ -89,7 +90,7 @@ func (s *CheckoutService) Checkout(ctx context.Context, req *pb.CheckoutReq) (*p
 	}
 
 	// 标记订单为已支付
-	if err := s.markOrderAsPaid(ctx, req.UserId, orderId); err != nil {
+	if err := s.markOrderAsPaid(ctx, req.UserId, orderIdInt64); err != nil {
 		log.Printf("标记订单为已支付失败: %v", err)
 		// 这里我们不返回错误，因为支付已经成功，只是标记失败
 		// 可以通过其他方式处理，比如异步重试
@@ -97,13 +98,13 @@ func (s *CheckoutService) Checkout(ctx context.Context, req *pb.CheckoutReq) (*p
 
 	// 返回结算响应
 	return &pb.CheckoutResp{
-		OrderId:       orderId,
+		OrderId:       fmt.Sprintf("%d", orderIdInt64),
 		TransactionId: chargeResp.TransactionId,
 	}, nil
 }
 
 // getOrderAmount 从订单服务获取订单金额
-func (s *CheckoutService) getOrderAmount(ctx context.Context, userId uint32, orderId string) (float32, error) {
+func (s *CheckoutService) getOrderAmount(ctx context.Context, userId uint32, orderId int64) (float32, error) {
 	// 连接订单服务
 	orderAddr := fmt.Sprintf("%s:%d", s.config.OrderService.Host, s.config.OrderService.Port)
 	orderConn, err := grpc.Dial(orderAddr, grpc.WithTransportCredentials(insecure.NewCredentials()))
@@ -145,7 +146,7 @@ func (s *CheckoutService) getOrderAmount(ctx context.Context, userId uint32, ord
 }
 
 // markOrderAsPaid 标记订单为已支付
-func (s *CheckoutService) markOrderAsPaid(ctx context.Context, userId uint32, orderId string) error {
+func (s *CheckoutService) markOrderAsPaid(ctx context.Context, userId uint32, orderId int64) error {
 	// 连接订单服务
 	orderAddr := fmt.Sprintf("%s:%d", s.config.OrderService.Host, s.config.OrderService.Port)
 	orderConn, err := grpc.Dial(orderAddr, grpc.WithTransportCredentials(insecure.NewCredentials()))
@@ -164,7 +165,7 @@ func (s *CheckoutService) markOrderAsPaid(ctx context.Context, userId uint32, or
 	// 标记订单为已支付
 	_, err = orderClient.MarkOrderPaid(timeoutCtx, &orderpb.MarkOrderPaidReq{
 		UserId:  userId,
-		OrderId: orderId,
+		OrderId: fmt.Sprintf("%d", orderId),
 	})
 	if err != nil {
 		return fmt.Errorf("标记订单为已支付失败: %v", err)

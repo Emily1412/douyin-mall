@@ -1,2 +1,3 @@
-p, 1, /user.UserService/GetUserInfo, access
-g, 1, admin 
+p, 6, /user.UserService/GetUserInfo, access
+p, 6, /api/payments/*, access
+g, 6, admin 

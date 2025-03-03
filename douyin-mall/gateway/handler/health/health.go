@@ -6,7 +6,7 @@ import (
 
 	//proto所在地
 	"net/http"
-	pb "payment-service/api"
+	paymentpb "payment-service/api"
 	"sync"
 	"time"
 
@@ -23,7 +23,7 @@ var serviceChecks = map[string]healthCheckFunc{
 	"payment": checkPaymentService,
 	// "user":     checkUserService,
 	// "order":    checkOrderService,
-	// "product":  checkProductService,
+	//"product":  checkProductService,
 	// "cart":     checkCartService,
 	// "checkout": checkCheckoutService,
 }
@@ -38,8 +38,8 @@ func checkPaymentService() bool {
 	}
 	defer conn.Close()
 
-	client := pb.NewPaymentServiceClient(conn)
-	resp, err := client.HealthCheck(ctx, &pb.HealthCheckRequest{})
+	client := paymentpb.NewPaymentServiceClient(conn)
+	resp, err := client.HealthCheck(ctx, &paymentpb.HealthCheckRequest{})
 	if err != nil {
 		return false
 	}
@@ -57,8 +57,8 @@ func checkPaymentService() bool {
 // 	}
 // 	defer conn.Close()
 
-// 	client := pb.NewProductServiceClient(conn)
-// 	_, err = client.HealthCheck(ctx, &pb.HealthCheckRequest{})
+// 	client := productpb.NewProductServiceClient(conn)
+// 	_, err = client.HealthCheck(ctx, &productpb.HealthCheckRequest{})
 // 	return err == nil
 // }
 
